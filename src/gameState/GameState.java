@@ -29,3 +29,4 @@ public abstract class GameState {
 // - Create HUD
 // - Simple platformer where the player can dash, double jump, and melee
 // - Add Events
+// - Rename scratching to meleeAttack

@@ -164,14 +164,13 @@ public class LevelOneState extends GameState {
 	public void handleInput() {
 		if(Keys.isPressed(Keys.ESCAPE)) gsm.setPaused(true);
 		if(blockInput || player.getHealth() == 0) return;
-		player.setUp(Keys.keyState[Keys.UP]);
+		//player.setUp(Keys.keyState[Keys.UP]);
 		player.setLeft(Keys.keyState[Keys.LEFT]);
 		player.setDown(Keys.keyState[Keys.DOWN]);
 		player.setRight(Keys.keyState[Keys.RIGHT]);
 		player.setJumping(Keys.keyState[Keys.JUMP]);
-		//player.setDashing(Keys.keyState[Keys.BUTTON2]);
+		player.setDashing(Keys.keyState[Keys.DASHING]);
 		if(Keys.isPressed(Keys.ATTACK)) player.setScratching();
-		//if(Keys.isPressed(Keys.BUTTON4)) player.setCharging();
 		if(Keys.isPressed(Keys.RESTART)) gsm.setState(GameStateManager.LEVEL_ONE_STATE);
 	}
 	

@@ -21,13 +21,14 @@ public class Keys {
 	public static int JUMP = 4;
 	public static int ATTACK = 5;
 	public static int RESTART = 6;
-	public static int BUTTON4 = 7;
+	public static int DASHING = 7;
 	public static int ENTER = 8;
 	public static int ESCAPE = 9;
 	
 	public static void keySet(int i, boolean b) {
 		if(i == KeyEvent.VK_W) {
 			keyState[UP] = b;
+			keyState[ATTACK] = b;
 		}
 		else if(i == KeyEvent.VK_A) {
 			keyState[LEFT] = b;
@@ -41,14 +42,11 @@ public class Keys {
 		else if(i == KeyEvent.VK_SPACE) {
 			keyState[JUMP] = b;
 		}
-		else if(i == KeyEvent.VK_SHIFT) {
-			keyState[ATTACK] = b;
-		}
 		else if(i == KeyEvent.VK_R) { 
 			keyState[RESTART] = b;
 		}
-		else if(i == KeyEvent.VK_F) { 
-			keyState[BUTTON4] = b;
+		else if(i == KeyEvent.VK_SHIFT) { 
+			keyState[DASHING] = b;
 		}
 		else if(i == KeyEvent.VK_ENTER) { 
 			keyState[ENTER] = b;
