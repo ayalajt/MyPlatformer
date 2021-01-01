@@ -17,12 +17,12 @@ public abstract class GameState {
 }
 
 // TODO: 
-// - Remove Gliding
-// - Remove Fireball
-// - Create new Player
+// - Remove Gliding - DONE
+// - Remove Fireball - DONE
+// - Create new Player - DONE
 // - Slowly incorporate new additions 
 // - Tell Player how to move in introduction of first level
-// - Create new Enemies
+// - Create new Enemies 
 // - Create Boss
 // - Teleports?
 // - Create Levels

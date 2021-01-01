@@ -35,7 +35,7 @@ public class LevelOneState extends GameState {
 		//tileMap is 30 pixels?
 		tileMap = new TileMap(30);
 		tileMap.loadTiles("/tilesets/grasstileset.gif");
-		tileMap.loadMap("/maps/level1-1.map");
+		tileMap.loadMap("/maps/levelOne.map");
 		tileMap.setPosition(0, 0);
 		tileMap.setTween(1);
 		
@@ -43,7 +43,7 @@ public class LevelOneState extends GameState {
 		
 		// player
 		player = new Player(tileMap);
-		player.setPosition(100, 400);
+		player.setPosition(100, 410);
 		player.setHealth(PlayerSave.getHealth());
 		player.setLives(PlayerSave.getLives());
 		
@@ -63,11 +63,20 @@ public class LevelOneState extends GameState {
 		enemies = new ArrayList<Enemy>();
 		Slugger s;
 		Point[] points = new Point[] {
-			new Point (200, 400),
-			new Point(860, 200),
-			new Point(1525, 400),
-			new Point(1680, 400),
-			new Point(1800, 400)};
+			//new Point (200, 400),
+			//new Point(860, 200),
+			//new Point(1525, 400),
+			new Point(1550, 440),
+			new Point(2720, 310),
+			new Point(4400, 400),
+			new Point(4500, 400),
+			new Point(4600, 400),
+			new Point(4700, 400),
+			new Point(5240, 430),
+			new Point(5480, 430),
+			new Point(5720, 430),			
+			};
+
 		
 		for (int i = 0; i < points.length; i++) {
 			s = new Slugger(tileMap);

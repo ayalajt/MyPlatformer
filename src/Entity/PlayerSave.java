@@ -8,7 +8,7 @@ public class PlayerSave {
 	
 	public static void init() {
 		lives = 3;
-		health = 5;
+		health = 3;
 		time = 0;
 	}
 	
