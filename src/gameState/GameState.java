@@ -30,3 +30,4 @@ public abstract class GameState {
 // - Simple platformer where the player can dash, double jump, and melee
 // - Add Events
 // - Rename scratching to meleeAttack
+// - Pause Tile
