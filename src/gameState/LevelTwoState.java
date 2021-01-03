@@ -11,7 +11,7 @@ import main.GamePanel;
 import tileMap.Background;
 import tileMap.TileMap;
 
-public class LevelOneState extends GameState {
+public class LevelTwoState extends GameState {
 
 	private TileMap tileMap;
 	private Background bg;
@@ -28,7 +28,7 @@ public class LevelOneState extends GameState {
 	
 	private boolean blockInput = false;
 	
-	public LevelOneState(GameStateManager gsm) {
+	public LevelTwoState(GameStateManager gsm) {
 		super(gsm);
 		init();
 	}
@@ -45,7 +45,7 @@ public class LevelOneState extends GameState {
 		
 		// player
 		player = new Player(tileMap);
-		player.setPosition(100, 410);
+		player.setPosition(100, 300);
 		player.setHealth(PlayerSave.getHealth());
 		player.setLives(PlayerSave.getLives());
 		
@@ -181,13 +181,13 @@ public class LevelOneState extends GameState {
 		}
 		
 		teleport.draw(g);
+
 		
 		// draw player
 		player.draw(g);
 		
 		hud.draw(g);
 		
-	
 		
 		// draw transition boxes
 		g.setColor(java.awt.Color.BLACK);

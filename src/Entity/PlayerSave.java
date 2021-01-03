@@ -3,7 +3,7 @@ package Entity;
 public class PlayerSave {
 	
 	private static int lives = 3;
-	private static int health = 5;
+	private static int health = 3;
 	private static long time = 0;
 	
 	public static void init() {

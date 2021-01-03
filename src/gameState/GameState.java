@@ -21,13 +21,16 @@ public abstract class GameState {
 // - Remove Fireball - DONE
 // - Create new Player - DONE
 // - Slowly incorporate new additions 
-// - Tell Player how to move in introduction of first level
+// - Tell Player how to move in introduction of first level - DONEISH, move some tiles
 // - Create new Enemies 
 // - Create Boss
-// - Teleports?
+// - Teleports - DONEISH, update teleport sprite
 // - Create Levels
 // - Create HUD
 // - Simple platformer where the player can dash, double jump, and melee
 // - Add Events
 // - Rename scratching to meleeAttack
 // - Pause Tile
+// - Update player when falling - DONE
+// - Create Level One Complete State
+// - Create Level Two
