@@ -47,6 +47,12 @@ public class LevelTwoState extends GameState {
 		player = new Player(tileMap);
 		player.setPosition(100, 300);
 		player.setHealth(PlayerSave.getHealth());
+
+		// if entering level from menu
+		if (gsm.getPrevState() == 0) {
+			PlayerSave.setLives(3);
+		}
+		
 		player.setLives(PlayerSave.getLives());
 		
 		populateEnemies();
@@ -107,14 +113,27 @@ public class LevelTwoState extends GameState {
 				
 		
 		// check if player dead event
+		if(player.getHealth() == 0) {
+				gsm.setState(GameStateManager.DEAD_STATE);
+					
+		}
 		
 		// set background
 		bg.setPosition(tileMap.getX(), tileMap.getY());
 		
 		// check if player dead event should start
-		//if(player.getHealth() == 0 || player.getY() > tileMap.getHeight()) {
-		//	eventDead = blockInput = true;
-		//}
+				if(player.getHealth() == 0) {
+					
+					// player dies but still has lives
+					if (player.getLives() > 0) {
+						PlayerSave.setLives(player.getLives() - 1);
+						gsm.setState(GameStateManager.DEAD_STATE);
+					}
+					// player no longer has lives
+					else {
+						gsm.setState(GameStateManager.GAME_OVER_STATE);
+					}
+				}
 		
 		player.update();
 

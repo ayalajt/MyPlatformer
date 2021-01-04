@@ -47,6 +47,12 @@ public class LevelOneState extends GameState {
 		player = new Player(tileMap);
 		player.setPosition(100, 410);
 		player.setHealth(PlayerSave.getHealth());
+		
+		// if entering level from menu
+		if (gsm.getPrevState() == 0) {
+			PlayerSave.setLives(3);
+		}
+		
 		player.setLives(PlayerSave.getLives());
 		
 		populateEnemies();
@@ -112,9 +118,18 @@ public class LevelOneState extends GameState {
 		bg.setPosition(tileMap.getX(), tileMap.getY());
 		
 		// check if player dead event should start
-		//if(player.getHealth() == 0 || player.getY() > tileMap.getHeight()) {
-		//	eventDead = blockInput = true;
-		//}
+		if(player.getHealth() == 0) {
+			
+			// player dies but still has lives
+			if (player.getLives() > 0) {
+				PlayerSave.setLives(player.getLives() - 1);
+				gsm.setState(GameStateManager.DEAD_STATE);
+			}
+			// player no longer has lives
+			else {
+				gsm.setState(GameStateManager.GAME_OVER_STATE);
+			}
+		}
 		
 		player.update();
 
@@ -198,7 +213,7 @@ public class LevelOneState extends GameState {
 	
 	public void handleInput() {
 		if(Keys.isPressed(Keys.ESCAPE)) gsm.setPaused(true);
-		if(blockInput || player.getHealth() == 0) return;
+		//if(blockInput || player.getHealth() == 0) return;
 		//player.setUp(Keys.keyState[Keys.UP]);
 		player.setLeft(Keys.keyState[Keys.LEFT]);
 		player.setDown(Keys.keyState[Keys.DOWN]);

@@ -69,6 +69,7 @@ public class Player extends MapObject {
 		doubleJumpStart = -4;
 		
 		health = maxHealth = 3;
+		lives = 3;
 	
 		
 		scratchDamage = 8;

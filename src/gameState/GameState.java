@@ -20,13 +20,12 @@ public abstract class GameState {
 // - Remove Gliding - DONE
 // - Remove Fireball - DONE
 // - Create new Player - DONE
-// - Slowly incorporate new additions 
 // - Tell Player how to move in introduction of first level - DONEISH, move some tiles
-// - Create new Enemies 
+// - Create new Enemies, flying stationary balloon slugger
 // - Create Boss
-// - Teleports - DONEISH, update teleport sprite
+// - Teleport - DONE
 // - Create Levels
-// - Create HUD
+// - Create HUD - DONE
 // - Simple platformer where the player can dash, double jump, and melee
 // - Add Events
 // - Rename scratching to meleeAttack
@@ -34,3 +33,5 @@ public abstract class GameState {
 // - Update player when falling - DONE
 // - Create Level One Complete State
 // - Create Level Two
+// - Pause States and DeadStates should have their own sprite bg
+// - make level one a little longer and easier at the end, use the current ending as the level 2 start
