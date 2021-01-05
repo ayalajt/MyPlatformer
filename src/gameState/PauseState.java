@@ -10,21 +10,20 @@ import tileMap.Background;
 
 public class PauseState extends GameState {
 	
-	private Font font;
 	private Background bg;
-
+	private Background text;
 	
 	public PauseState(GameStateManager gsm) {
 		
 		super(gsm);
 		
-		// fonts
-		font = new Font("Arial", Font.PLAIN, 30);
+	
 		
 		try {
 			bg = new Background("/backgrounds/menubg.gif", 1);
 			// changed from -0.1 originally
 			bg.setVector(-0.4, 0);
+			text = new Background("/backgrounds/pauseBackground.gif", 1);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -36,20 +35,13 @@ public class PauseState extends GameState {
 	
 	public void update() {
 		bg.update();
+		text.update();
 		handleInput();
 	}
 	
 	public void draw(Graphics2D g) {
-	//	g.setColor(Color.BLACK);
-		//g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		bg.draw(g);
-		g.setColor(Color.RED);
-		g.setFont(font);
-		g.drawString("Game Paused", 220, 90);
-		
-		g.setColor(Color.WHITE);
-		g.setFont(font);
-		g.drawString("Press ESC to go back to the level", 100, 400);
+		text.draw(g);
 	}
 	
 	public void handleInput() {

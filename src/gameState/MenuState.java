@@ -7,6 +7,7 @@ import tileMap.Background;
 public class MenuState extends GameState {
 	
 	private Background bg;
+	private Background title;
 	private int currentChoice = 0;
 	private String[] options = { "START", "QUIT" };
 	
@@ -20,6 +21,7 @@ public class MenuState extends GameState {
 		super(gsm);
 		try {
 			bg = new Background("/backgrounds/menubg.gif", 1);
+			title = new Background("/backgrounds/title.gif", 1);
 			// changed from -0.1 originally
 			bg.setVector(-0.4, 0);
 			titleColor = new Color(199, 8, 8);
@@ -37,15 +39,19 @@ public class MenuState extends GameState {
 	public void init() {}
 	public void update() {
 		bg.update();
+		title.update();
 		handleInput();
 	}
 	public void draw(Graphics2D g) {
+
 		bg.draw(g);
+		title.draw(g);
+
 		
 		// Draw title
-		g.setColor(titleColor);
-		g.setFont(titleFont);
-		g.drawString("Squared", 210, 130);
+		//g.setColor(titleColor);
+		//g.setFont(titleFont);
+		//g.drawString("Squared", 210, 130);
 		
 
 		
@@ -62,7 +68,7 @@ public class MenuState extends GameState {
 				
 			}
 			// drawing options one after the other
-			g.drawString(options[i],270,230 + i * 40);
+			g.drawString(options[i],270,340 + i * 40);
 			
 		}
 	}

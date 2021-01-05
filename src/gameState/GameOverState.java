@@ -7,6 +7,7 @@ import tileMap.Background;
 public class GameOverState extends GameState {
 	
 	private Background bg;
+	private Background text;
 	private int currentChoice = 0;
 	private String[] options = { "Press ESC to go back to main menu"};
 	
@@ -25,6 +26,7 @@ public class GameOverState extends GameState {
 			titleFont = new Font("SansSerif", Font.BOLD, 50);
 			
 			defaultFont = new Font("Arial", Font.PLAIN, 25);
+			text = new Background("/backgrounds/gameOverBackground.gif",1);
 			
 		}
 		catch(Exception e) {
@@ -35,30 +37,13 @@ public class GameOverState extends GameState {
 	public void init() {}
 	public void update() {
 		bg.update();
+		text.update();
 		handleInput();
 	}
 	public void draw(Graphics2D g) {
 		bg.draw(g);
+		text.draw(g);
 		
-		// Draw title
-		g.setColor(titleColor);
-		g.setFont(titleFont);
-		g.drawString("Game Over!", 190, 130);
-		
-
-		
-		// Draw menu options
-		g.setFont(defaultFont);
-		for (int i = 0; i < options.length; i++) {
-			if (i == currentChoice) {
-				g.setColor(Color.BLACK);
-				g.setFont(defaultFont);
-				
-			}
-			// drawing options one after the other
-			g.drawString(options[i], 100,400 + i * 40);
-			
-		}
 	}
 
 	public void handleInput() {

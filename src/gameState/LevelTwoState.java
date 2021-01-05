@@ -112,11 +112,6 @@ public class LevelTwoState extends GameState {
 				}
 				
 		
-		// check if player dead event
-		if(player.getHealth() == 0) {
-				gsm.setState(GameStateManager.DEAD_STATE);
-					
-		}
 		
 		// set background
 		bg.setPosition(tileMap.getX(), tileMap.getY());

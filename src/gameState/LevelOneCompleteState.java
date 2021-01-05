@@ -7,6 +7,7 @@ import tileMap.Background;
 public class LevelOneCompleteState extends GameState {
 	
 	private Background bg;
+	private Background text;
 	private int currentChoice = 0;
 	private String[] options = { "Press Enter to Continue to the Level Two" };
 	
@@ -19,6 +20,7 @@ public class LevelOneCompleteState extends GameState {
 		super(gsm);
 		try {
 			bg = new Background("/backgrounds/menubg.gif", 1);
+			text = new Background("/backgrounds/LevelOneCompleteBG.gif", 1);
 			// changed from -0.1 originally
 			bg.setVector(-0.4, 0);
 			titleColor = new Color(199, 8, 8);
@@ -35,30 +37,12 @@ public class LevelOneCompleteState extends GameState {
 	public void init() {}
 	public void update() {
 		bg.update();
+		text.update();
 		handleInput();
 	}
 	public void draw(Graphics2D g) {
 		bg.draw(g);
-		
-		// Draw title
-		g.setColor(titleColor);
-		g.setFont(titleFont);
-		g.drawString("Level One Complete!", 90, 130);
-		
-
-		
-		// Draw menu options
-		g.setFont(defaultFont);
-		for (int i = 0; i < options.length; i++) {
-			if (i == currentChoice) {
-				g.setColor(Color.BLACK);
-				g.setFont(defaultFont);
-				
-			}
-			// drawing options one after the other
-			g.drawString(options[i],100,400 + i * 40);
-			
-		}
+		text.draw(g);
 	}
 	private void select() {
 		
