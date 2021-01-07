@@ -37,7 +37,7 @@ public class LevelTwoState extends GameState {
 		//tileMap is 30 pixels?
 		tileMap = new TileMap(30);
 		tileMap.loadTiles("/tilesets/grasstileset.gif");
-		tileMap.loadMap("/maps/levelOne.map");
+		tileMap.loadMap("/maps/levelTwo.map");
 		tileMap.setPosition(0, 0);
 		tileMap.setTween(1);
 		
@@ -45,13 +45,10 @@ public class LevelTwoState extends GameState {
 		
 		// player
 		player = new Player(tileMap);
-		player.setPosition(100, 300);
+		player.setPosition(50, 170);
 		player.setHealth(PlayerSave.getHealth());
 
-		// if entering level from menu
-		if (gsm.getPrevState() == 0) {
-			PlayerSave.setLives(3);
-		}
+		
 		
 		player.setLives(PlayerSave.getLives());
 		
@@ -77,28 +74,20 @@ public class LevelTwoState extends GameState {
 	
 	private void populateEnemies() {
 		enemies = new ArrayList<Enemy>();
-		Slugger s;
-		Point[] points = new Point[] {
-			//new Point (200, 400),
-			//new Point(860, 200),
-			//new Point(1525, 400),
-			new Point(1550, 440),
-			new Point(2720, 310),
-			new Point(4400, 400),
-			new Point(4500, 400),
-			new Point(4600, 400),
-			new Point(4700, 400),
-			new Point(5240, 430),
-			new Point(5480, 430),
-			new Point(5720, 430),			
-			};
+		Spikey s;
+		Point[] points = new Point[] { new Point(300, 200)};
 
 		
 		for (int i = 0; i < points.length; i++) {
-			s = new Slugger(tileMap);
-			s.setPosition(points[i].x, points[i].y);
-			enemies.add(s);
+			//s = new Spikey(tileMap);
+			//s.setPosition(points[i].x, points[i].y);
+			//enemies.add(s);
 		}
+		
+		BalloonSpikey t;
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(900, 180);
+		enemies.add(t);
 		
 	}
 	public void update() {
@@ -166,7 +155,7 @@ public class LevelTwoState extends GameState {
 		
 		// if player falls off map
 		if (player.getY() > 480) {
-			player.setPosition(100, 410);
+			player.setPosition(50, 170);
 			player.setHealth(player.getHealth() - 1);
 		}
 		
@@ -220,7 +209,7 @@ public class LevelTwoState extends GameState {
 		player.setJumping(Keys.keyState[Keys.JUMP]);
 		player.setDashing(Keys.keyState[Keys.DASHING]);
 		if(Keys.isPressed(Keys.ATTACK)) player.setScratching();
-		if(Keys.isPressed(Keys.RESTART)) gsm.setState(GameStateManager.LEVEL_ONE_STATE);
+		if(Keys.isPressed(Keys.RESTART)) gsm.setState(gsm.getCurrentState());
 	}
 	
 	// events //

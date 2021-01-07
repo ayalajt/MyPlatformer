@@ -41,7 +41,7 @@ public class LevelOneState extends GameState {
 		tileMap.setPosition(0, 0);
 		tileMap.setTween(1);
 		
-		bg = new Background("/backgrounds/grassbg1.gif", 0.1);
+		bg = new Background("/backgrounds/levelBG.gif", 0.1);
 		
 		// player
 		player = new Player(tileMap);
@@ -77,7 +77,7 @@ public class LevelOneState extends GameState {
 	
 	private void populateEnemies() {
 		enemies = new ArrayList<Enemy>();
-		Slugger s;
+		Spikey s;
 		Point[] points = new Point[] {
 			//new Point (200, 400),
 			//new Point(860, 200),
@@ -95,10 +95,15 @@ public class LevelOneState extends GameState {
 
 		
 		for (int i = 0; i < points.length; i++) {
-			s = new Slugger(tileMap);
+			s = new Spikey(tileMap);
 			s.setPosition(points[i].x, points[i].y);
 			enemies.add(s);
 		}
+		
+		BalloonSpikey t;
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(200, 350);
+		enemies.add(t);
 		
 	}
 	public void update() {

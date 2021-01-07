@@ -35,3 +35,6 @@ public abstract class GameState {
 // - Create Level Two
 // - Pause States and DeadStates should have their own sprite bg
 // - make level one a little longer and easier at the end, use the current ending as the level 2 start
+
+// - update level 1, update level 1 tiles, create level 1 bg, update main menu bg and select text
+// - menu select text can be a single image with black choices but when moving choices just make a yellow text mask

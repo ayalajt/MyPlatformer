@@ -141,6 +141,7 @@ public class Player extends MapObject {
 					if ((e.getX() > x) && (e.getX() < x + scratchRange)
 								&& (e.getY() > y - height / 2) && (e.getY() < y + height / 2)) {
 							e.hit(scratchDamage);
+							
 						}
 					}
 				else {
@@ -197,7 +198,9 @@ public class Player extends MapObject {
 		
 
 		double maxSpeed = this.maxSpeed;
+		//old dash
 		if(dashing) maxSpeed *= 1.50;
+		
 		
 		// movement
 		if (left) {

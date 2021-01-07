@@ -1,6 +1,8 @@
 package gameState;
 
 import java.awt.*;
+import java.io.File;
+
 import handlers.Keys;
 import tileMap.Background;
 
@@ -11,8 +13,6 @@ public class MenuState extends GameState {
 	private int currentChoice = 0;
 	private String[] options = { "START", "QUIT" };
 	
-	private Color titleColor;
-	private Font titleFont;
 	private Font defaultBoldFont;
 	
 	private Font defaultFont;
@@ -24,8 +24,6 @@ public class MenuState extends GameState {
 			title = new Background("/backgrounds/title.gif", 1);
 			// changed from -0.1 originally
 			bg.setVector(-0.4, 0);
-			titleColor = new Color(199, 8, 8);
-			titleFont = new Font("SansSerif", Font.BOLD, 50);
 			
 			defaultFont = new Font("Arial", Font.PLAIN, 25);
 			defaultBoldFont = new Font("Arial", Font.BOLD + Font.ITALIC, 25);
@@ -46,12 +44,6 @@ public class MenuState extends GameState {
 
 		bg.draw(g);
 		title.draw(g);
-
-		
-		// Draw title
-		//g.setColor(titleColor);
-		//g.setFont(titleFont);
-		//g.drawString("Squared", 210, 130);
 		
 
 		
@@ -77,6 +69,9 @@ public class MenuState extends GameState {
 		// Start State
 		if(currentChoice == 0) {
 			gsm.setState(GameStateManager.LEVEL_ONE_STATE);
+			
+			//debug level 2
+			//gsm.setState(GameStateManager.LEVEL_TWO_STATE);
 		}
 		if(currentChoice == 1) {
 			System.exit(0);

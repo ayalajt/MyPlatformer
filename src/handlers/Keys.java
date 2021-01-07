@@ -1,6 +1,7 @@
 package handlers;
 
 import java.awt.event.KeyEvent;
+import java.util.concurrent.TimeUnit;
 
 // this class contains a boolean array of current and previous key states
 // for the 10 keys that are used for this game.
@@ -25,34 +26,36 @@ public class Keys {
 	public static int ENTER = 8;
 	public static int ESCAPE = 9;
 	
-	public static void keySet(int i, boolean b) {
+	
+	
+	public static void keySet(int i, boolean keyPressed)  {
 		if(i == KeyEvent.VK_W) {
-			keyState[UP] = b;
-			keyState[ATTACK] = b;
+			keyState[UP] = keyPressed;
+			keyState[ATTACK] = keyPressed;
 		}
 		else if(i == KeyEvent.VK_A) {
-			keyState[LEFT] = b;
+			keyState[LEFT] = keyPressed;
 		}
 		else if(i == KeyEvent.VK_S) {
-			keyState[DOWN] = b;
+			keyState[DOWN] = keyPressed;
 		}
 		else if(i == KeyEvent.VK_D) {
-			keyState[RIGHT] = b;
+			keyState[RIGHT] = keyPressed;
 		}
 		else if(i == KeyEvent.VK_SPACE) {
-			keyState[JUMP] = b;
+			keyState[JUMP] = keyPressed;
 		}
 		else if(i == KeyEvent.VK_R) { 
-			keyState[RESTART] = b;
+			keyState[RESTART] = keyPressed;
 		}
 		else if(i == KeyEvent.VK_SHIFT) { 
-			keyState[DASHING] = b;
+			keyState[DASHING] = keyPressed;
 		}
 		else if(i == KeyEvent.VK_ENTER) { 
-			keyState[ENTER] = b;
+			keyState[ENTER] = keyPressed;
 		}
 		else if(i == KeyEvent.VK_ESCAPE) { 
-			keyState[ESCAPE] = b;
+			keyState[ESCAPE] = keyPressed;
 		}
 	}
 	
