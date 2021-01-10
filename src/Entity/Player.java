@@ -64,7 +64,7 @@ public class Player extends MapObject {
 		fallSpeed = 0.15;
 		maxFallSpeed = 4.0;
 		jumpStart = -4;
-		stopJumpSpeed = 0.3;
+		stopJumpSpeed = 0.5;
 		facingRight = true;
 		doubleJumpStart = -4;
 		

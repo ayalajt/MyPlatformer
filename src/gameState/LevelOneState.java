@@ -79,9 +79,6 @@ public class LevelOneState extends GameState {
 		enemies = new ArrayList<Enemy>();
 		Spikey s;
 		Point[] points = new Point[] {
-			//new Point (200, 400),
-			//new Point(860, 200),
-			//new Point(1525, 400),
 			new Point(1550, 440),
 			new Point(2720, 310),
 			new Point(4400, 400),
@@ -100,11 +97,65 @@ public class LevelOneState extends GameState {
 			enemies.add(s);
 		}
 		
-		BalloonSpikey t;
-		t = new BalloonSpikey(tileMap);
-		t.setPosition(200, 350);
-		enemies.add(t);
+		StaticSpikey d = new StaticSpikey(tileMap);
+		d.setPosition(1830, 410);
 		
+		enemies.add(d);
+
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(1851, 410);
+		
+		enemies.add(d);
+
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(1872, 410);
+		
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(1893, 410);
+		
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(1914, 410);
+		
+		enemies.add(d);
+		
+		// stair spikes
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(3026, 320);
+		enemies.add(d);
+		d = new StaticSpikey(tileMap);
+		d.setPosition(3047, 320);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(3085, 350);
+		enemies.add(d);
+		d = new StaticSpikey(tileMap);
+		d.setPosition(3106, 350);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(3149, 380);
+		enemies.add(d);
+		d = new StaticSpikey(tileMap);
+		d.setPosition(3170, 380);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(5295, 410);
+		enemies.add(d);
+		d = new StaticSpikey(tileMap);
+		d.setPosition(5535, 410);
+		enemies.add(d);
+		d = new StaticSpikey(tileMap);
+		d.setPosition(5775, 410);
+		enemies.add(d);
 	}
 	public void update() {
 		
@@ -117,6 +168,10 @@ public class LevelOneState extends GameState {
 				}
 				
 		
+		//debug
+		//if (player.getX() > 1800) {
+		//	System.out.println(player.getY());
+		//}
 		// check if player dead event
 		
 		// set background

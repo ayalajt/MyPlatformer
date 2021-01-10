@@ -41,7 +41,7 @@ public class LevelTwoState extends GameState {
 		tileMap.setPosition(0, 0);
 		tileMap.setTween(1);
 		
-		bg = new Background("/backgrounds/grassbg1.gif", 0.1);
+		bg = new Background("/backgrounds/levelBG.gif", 0.1);
 		
 		// player
 		player = new Player(tileMap);
@@ -88,6 +88,31 @@ public class LevelTwoState extends GameState {
 		t = new BalloonSpikey(tileMap);
 		t.setPosition(900, 180);
 		enemies.add(t);
+		
+		StaticSpikey d = new StaticSpikey(tileMap);
+		d.setPosition(100, 170);
+		d.setUpsideDown();
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(2531, 225);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(2562, 225);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(2593, 225);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(2624, 225);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(2655, 225);
+		enemies.add(d);
 		
 	}
 	public void update() {

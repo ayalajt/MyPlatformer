@@ -36,6 +36,7 @@ public class MenuState extends GameState {
 	
 	public void init() {}
 	public void update() {
+		
 		bg.update();
 		title.update();
 		handleInput();
