@@ -17,6 +17,7 @@ public abstract class GameState {
 }
 
 // TODO: 
+// - Three Levels Max, Final Boss 
 // - Remove Gliding - DONE
 // - Remove Fireball - DONE
 // - Create new Player - DONE

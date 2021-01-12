@@ -89,9 +89,40 @@ public class LevelTwoState extends GameState {
 		t.setPosition(900, 180);
 		enemies.add(t);
 		
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(1020, 215);
+		enemies.add(t);
+		
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(1260, 215);
+		enemies.add(t);
+		
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(1525, 215);
+		enemies.add(t);
+		
 		StaticSpikey d = new StaticSpikey(tileMap);
-		d.setPosition(100, 170);
-		d.setUpsideDown();
+		d.setPosition(1835, 350);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(1856, 350);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(2060, 290);
+		enemies.add(d);
+
+		d = new StaticSpikey(tileMap);
+		d.setPosition(2081, 290);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(2102, 290);
+		enemies.add(d);
+		
+		d = new StaticSpikey(tileMap);
+		d.setPosition(2123, 290);
 		enemies.add(d);
 		
 		d = new StaticSpikey(tileMap);
@@ -113,6 +144,34 @@ public class LevelTwoState extends GameState {
 		d = new StaticSpikey(tileMap);
 		d.setPosition(2655, 225);
 		enemies.add(d);
+
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(2760, 160);
+		enemies.add(t);
+		
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(2925, 160);
+		enemies.add(t);
+		
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(3105, 160);
+		enemies.add(t);
+		
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(3285, 160);
+		enemies.add(t);
+		
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(3470, 160);
+		enemies.add(t);
+		
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(3650, 200);
+		enemies.add(t);
+		
+		t = new BalloonSpikey(tileMap);
+		t.setPosition(3825, 210);
+		enemies.add(t);
 		
 	}
 	public void update() {
