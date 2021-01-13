@@ -37,7 +37,7 @@ public class StaticSpikey extends Enemy {
 		
 		// if left or right then swap cwidth and cheight
 		
-		health = maxHealth = 2;
+		health = maxHealth = 9999;
 		damage = 1;
 		
 		// load sprites

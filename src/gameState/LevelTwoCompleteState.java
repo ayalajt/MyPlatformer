@@ -4,19 +4,22 @@ import java.awt.*;
 import handlers.Keys;
 import tileMap.Background;
 
-public class LevelOneCompleteState extends GameState {
+public class LevelTwoCompleteState extends GameState {
 	
 	private Background bg;
 	private Background text;
 	private int currentChoice = 0;
+
 	
-	public LevelOneCompleteState(GameStateManager gsm) {
+	
+	public LevelTwoCompleteState(GameStateManager gsm) {
 		super(gsm);
 		try {
 			bg = new Background("/backgrounds/menubg.gif", 1);
-			text = new Background("/backgrounds/LevelOneCompleteBG.gif", 1);
+			text = new Background("/backgrounds/LevelTwoCompleteBG.gif", 1);
 			// changed from -0.1 originally
 			bg.setVector(-0.4, 0);
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -37,7 +40,7 @@ public class LevelOneCompleteState extends GameState {
 		
 		// Start State
 		if(currentChoice == 0) {
-			gsm.setState(GameStateManager.LEVEL_TWO_STATE);
+			gsm.setState(GameStateManager.MENU_STATE);
 		}
 	}
 	public void handleInput() {

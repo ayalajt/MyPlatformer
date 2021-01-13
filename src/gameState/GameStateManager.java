@@ -22,6 +22,7 @@ public class GameStateManager {
 	public static final int LEVEL_ONE_STATE = 3;
 	public static final int LEVEL_ONE_COMPLETE_STATE = 4;
 	public static final int LEVEL_TWO_STATE = 5;
+	public static final int LEVEL_TWO_COMPLETE_STATE = 6;
 	
 	
 	public GameStateManager() {
@@ -61,6 +62,10 @@ public class GameStateManager {
 		if (state == LEVEL_TWO_STATE) {
 			gameStates[state] = new LevelTwoState(this);
 		}
+		if (state == LEVEL_TWO_COMPLETE_STATE) {
+			gameStates[state] = new LevelTwoCompleteState(this);
+		}
+		
 		
 	}
 	
