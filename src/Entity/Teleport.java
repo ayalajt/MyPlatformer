@@ -46,5 +46,4 @@ public class Teleport extends MapObject {
 		setMapPosition();
 		super.draw(g);
 	}
-
 }

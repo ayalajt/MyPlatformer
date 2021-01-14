@@ -6,9 +6,12 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/** 
+ * The Player class contains the data and information
+ * of the player object 
+ */
 public class Player extends MapObject {
 
-	// player stuff
 	private int health;
 	private int maxHealth;
 	private boolean dead;
@@ -18,31 +21,27 @@ public class Player extends MapObject {
 
 	private boolean knockback;
 	private boolean doubleJump;
-	private boolean alreadyDoubleJump;
+	private boolean alreadyDoubleJumping;
 	private double doubleJumpStart;
 
 	// scratch
 	private boolean meleeAttack;
-	private int scratchDamage;
-	private int scratchRange;
+	private int meleeDamage;
+	private int meleeRange;
 
 	private boolean dashing;
 
 	// animations
 	private ArrayList<BufferedImage[]> sprites;
 
-	// number of frames each animation has, with idle
-	// being the first
-	private final int[] numFrames = { 2, 8, 1, 2, 4, 2, 5 };
+	// number of frames each animation has, with idle being the first
+	private final int[] numFrames = {1, 5};
 
 	// animation actions
 	private static final int IDLE = 0;
-	private static final int WALKING = 1;
-	private static final int JUMPING = 2;
-	private static final int FALLING = 3;
-	// private static final int GLIDING = 4;
-	// private static final int FIREBALL = 5;
-	private static final int MELEE_ATTACK = 6;
+	private static final int WALKING = 0;
+	private static final int JUMPING = 0;
+	private static final int MELEE_ATTACK = 1;
 
 	public Player(TileMap tm) {
 		super(tm);
@@ -68,37 +67,33 @@ public class Player extends MapObject {
 		health = maxHealth = 3;
 		lives = 3;
 
-		scratchDamage = 8;
-		scratchRange = 40;
+		meleeDamage = 8;
+		meleeRange = 40;
 
 		// load sprites
 		try {
-			BufferedImage spritesheet = ImageIO
-					.read(getClass().getResourceAsStream("/sprites_player/playersprites.gif"));
+			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/sprites_player/player.gif"));
 
 			sprites = new ArrayList<BufferedImage[]>();
-			// for 7 animation actions
-			for (int i = 0; i < 7; i++) {
-				BufferedImage[] bi = new BufferedImage[numFrames[i]];
+			for (int i = 0; i < 2; i++) {
+				BufferedImage[] actionSprites = new BufferedImage[numFrames[i]];
 				for (int j = 0; j < numFrames[i]; j++) {
 					if (i != MELEE_ATTACK) {
-						bi[j] = spritesheet.getSubimage(j * width, i * height, width, height);
+						actionSprites[j] = spritesheet.getSubimage(j * width, i * height, width, height);
 					} else {
-						bi[j] = spritesheet.getSubimage(j * width * 2, i * height, width * 2, height);
+						actionSprites[j] = spritesheet.getSubimage(j * width * 2, i * height, width * 2, height);
 					}
 				}
-				sprites.add(bi);
+				sprites.add(actionSprites);
 			}
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 
 		animation = new Animation();
 		currentAction = IDLE;
 		animation.setFrames(sprites.get(IDLE));
-		animation.setDelay(400);
-
 	}
 
 	public int getHealth() {
@@ -109,23 +104,25 @@ public class Player extends MapObject {
 		return maxHealth;
 	}
 
-	public void setScratching() {
+	public void setAttacking() {
 		meleeAttack = true;
 	}
 
-	public void setJumping(boolean b) {
-		if (knockback)
+	public void setJumping(boolean value) {
+		if (knockback) {
 			return;
-		if (b && !jumping && falling && !alreadyDoubleJump) {
+		}
+		if (value && !jumping && falling && !alreadyDoubleJumping) {
 			doubleJump = true;
 		}
-		jumping = b;
+		jumping = value;
 	}
 
-	public void setDashing(boolean b) {
-		if (!b)
+	public void setDashing(boolean value) {
+		if (!value) {
 			dashing = false;
-		else if (b && !falling) {
+		}
+		else if (value && !falling) {
 			dashing = true;
 		}
 	}
@@ -138,48 +135,54 @@ public class Player extends MapObject {
 
 		// loop through enemies
 		for (int i = 0; i < enemies.size(); i++) {
-			Enemy e = enemies.get(i);
+			Enemy currentEnemy = enemies.get(i);
 
 			// scratch attack
 			if (meleeAttack) {
 				if (facingRight) {
-					if ((e.getX() > x) && (e.getX() < x + scratchRange) && (e.getY() > y - height / 2)
-							&& (e.getY() < y + height / 2)) {
-						e.hit(scratchDamage);
-
+					if ((currentEnemy.getX() > x) && (currentEnemy.getX() < x + meleeRange) && 
+						(currentEnemy.getY() > y - height / 2) && 
+						(currentEnemy.getY() < y + height / 2)) {
+							currentEnemy.hit(meleeDamage);
 					}
 				} else {
-					if (e.getX() < x && e.getX() > x - scratchRange && e.getY() > y - height / 2
-							&& e.getY() < y + height / 2) {
-						e.hit(scratchDamage);
+					if ((currentEnemy.getX() < x) && 
+						(currentEnemy.getX() > x - meleeRange) && 
+						(currentEnemy.getY() > y - height / 2) && 
+						(currentEnemy.getY() < y + height / 2)) {
+							currentEnemy.hit(meleeDamage);
 					}
 				}
 			}
 
 			// check enemy collisions
-			if (intersection(e)) {
-				hit(e.getDamage());
+			if (checkIntersection(currentEnemy)) {
+				hit(currentEnemy.getDamage());
 			}
 		}
-
 	}
 
 	public void hit(int damage) {
-		if (flinching)
+		if (flinching) {
 			return;
-		health -= damage;
+		}
+
+		health = health - damage;
 		if (health < 0) {
 			health = 0;
 		}
 		if (health == 0) {
 			dead = true;
 		}
+
 		flinching = true;
 		flinchTimer = System.nanoTime();
-		if (facingRight)
+
+		if (facingRight) {
 			dx = -1;
-		else
+		} else {
 			dx = 1;
+		}
 		dy = -3;
 		knockback = true;
 		falling = true;
@@ -206,42 +209,49 @@ public class Player extends MapObject {
 	public int getLives() {
 		return lives;
 	}
+	
+	public boolean isDead() {
+		return dead;
+	}
+	
+	public void setDead() {
+		dead = true;
+	}
+	
 
 	private void getNextPosition() {
 
 		if (knockback) {
-			dy += fallSpeed * 2;
+			dy = dy + (fallSpeed * 2);
 			if (!falling)
 				knockback = false;
 			return;
 		}
 
 		double maxSpeed = this.maxSpeed;
-		// old dash
+
 		if (dashing)
-			maxSpeed *= 1.50;
+			maxSpeed = maxSpeed * 1.50;
 
 		// movement
 		if (left) {
-			dx -= moveSpeed;
+			dx = dx - moveSpeed;
 			if (dx < -maxSpeed) {
 				dx = -maxSpeed;
 			}
-
 		} else if (right) {
-			dx += moveSpeed;
+			dx = dx + moveSpeed;
 			if (dx > maxSpeed) {
 				dx = maxSpeed;
 			}
-
 		} else {
 			if (dx > 0) {
-				dx -= stopSpeed;
+				dx = dx - stopSpeed;
 				if (dx < 0) {
 					dx = 0;
 				}
 			} else if (dx < 0) {
-				dx += stopSpeed;
+				dx = dx + stopSpeed;
 				if (dx > 0) {
 					dx = 0;
 				}
@@ -264,25 +274,27 @@ public class Player extends MapObject {
 		// double jump
 		if (doubleJump) {
 			dy = doubleJumpStart;
-			alreadyDoubleJump = true;
+			alreadyDoubleJumping = true;
 			doubleJump = false;
 		}
 
-		if (!falling)
-			alreadyDoubleJump = false;
-
+		if (!falling) {
+			alreadyDoubleJumping = false;
+		}
+		
 		// falling
 		if (falling) {
-			dy += fallSpeed;
-			if (dy > 0)
+			dy = dy + fallSpeed;
+			if (dy > 0) {
 				jumping = false;
-			if (dy < 0 && !jumping)
+			}
+			if (dy < 0 && !jumping) {
 				dy += stopJumpSpeed;
-			if (dy > maxFallSpeed)
+			}
+			if (dy > maxFallSpeed) {
 				dy = maxFallSpeed;
-
+			}
 		}
-
 	}
 
 	public void update() {
@@ -319,21 +331,18 @@ public class Player extends MapObject {
 			if (currentAction != JUMPING) {
 				currentAction = JUMPING;
 				animation.setFrames(sprites.get(JUMPING));
-				animation.setDelay(-1);
 				width = 30;
 			}
 		} else if (left || right) {
 			if (currentAction != WALKING) {
 				currentAction = WALKING;
 				animation.setFrames(sprites.get(WALKING));
-				animation.setDelay(100);
 				width = 30;
 			}
 		} else {
 			if (currentAction != IDLE) {
 				currentAction = IDLE;
 				animation.setFrames(sprites.get(IDLE));
-				animation.setDelay(100);
 				width = 30;
 			}
 		}
@@ -351,7 +360,7 @@ public class Player extends MapObject {
 
 	public void draw(Graphics2D g) {
 		setMapPosition();
-
+		
 		// draw player
 		if (flinching) {
 			long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
@@ -359,9 +368,7 @@ public class Player extends MapObject {
 				return;
 			}
 		}
-
+		
 		super.draw(g);
-
 	}
-
 }

@@ -2,7 +2,6 @@ package Entity.Enemies;
 
 import tileMap.TileMap;
 import Entity.*;
-import handlers.Content;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -99,17 +98,6 @@ public class BalloonSpikey extends Enemy {
 			}
 		}
 		
-		// if it hits a wall, then go opposite direction
-	/*	if (right && dx == 0) {
-			right = false;
-			left = true;
-			facingRight = false;
-		}
-		else if (left && dx == 0) {
-			right = true;
-			left = false;
-			facingRight = true;
-		}*/
 		
 		animation.update();
 	}

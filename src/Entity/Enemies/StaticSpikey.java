@@ -2,7 +2,6 @@ package Entity.Enemies;
 
 import tileMap.TileMap;
 import Entity.*;
-import handlers.Content;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

@@ -74,7 +74,7 @@ public class LevelTwoState extends GameState {
 	
 	private void populateEnemies() {
 		enemies = new ArrayList<Enemy>();
-		Spikey s;
+		//Spikey s;
 		Point[] points = new Point[] { new Point(300, 200)};
 
 		
@@ -553,7 +553,7 @@ public class LevelTwoState extends GameState {
 		handleInput();
 		
 		// check if end of level event should start
-				if(teleport.intersection(player)) {
+				if(teleport.checkIntersection(player)) {
 					gsm.setState(GameStateManager.LEVEL_TWO_COMPLETE_STATE);
 				}
 				
@@ -665,7 +665,7 @@ public class LevelTwoState extends GameState {
 		player.setRight(Keys.keyState[Keys.RIGHT]);
 		player.setJumping(Keys.keyState[Keys.JUMP]);
 		player.setDashing(Keys.keyState[Keys.DASHING]);
-		if(Keys.isPressed(Keys.ATTACK)) player.setScratching();
+		if(Keys.isPressed(Keys.ATTACK)) player.setAttacking();
 		if(Keys.isPressed(Keys.RESTART)) gsm.setState(gsm.getCurrentState());
 	}
 	

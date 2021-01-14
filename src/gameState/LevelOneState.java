@@ -26,7 +26,7 @@ public class LevelOneState extends GameState {
 	private HUD hud;
 	private Teleport teleport;
 	
-	private boolean blockInput = false;
+	//private boolean blockInput = false;
 	
 	public LevelOneState(GameStateManager gsm) {
 		super(gsm);
@@ -163,7 +163,7 @@ public class LevelOneState extends GameState {
 		handleInput();
 		
 		// check if end of level event should start
-				if(teleport.intersection(player)) {
+				if(teleport.checkIntersection(player)) {
 					gsm.setState(GameStateManager.LEVEL_ONE_COMPLETE_STATE);
 				}
 				
@@ -280,7 +280,7 @@ public class LevelOneState extends GameState {
 		player.setRight(Keys.keyState[Keys.RIGHT]);
 		player.setJumping(Keys.keyState[Keys.JUMP]);
 		player.setDashing(Keys.keyState[Keys.DASHING]);
-		if(Keys.isPressed(Keys.ATTACK)) player.setScratching();
+		if(Keys.isPressed(Keys.ATTACK)) player.setAttacking();
 		if(Keys.isPressed(Keys.RESTART)) gsm.setState(GameStateManager.LEVEL_ONE_STATE);
 	}
 	

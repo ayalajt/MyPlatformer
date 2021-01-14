@@ -19,9 +19,6 @@ public abstract class GameState {
 // TODO: 
 // - Three Levels Max, Final Boss 
 // - Create Boss
-// - Create Level Two Complete State
-// - Add Balloon Spikeys to Level Two
 // - Create Level Three
 // - Pause States and DeadStates should have their own sprite bg
 // - Add comments
-// - Customize not on screen to make game less laggy

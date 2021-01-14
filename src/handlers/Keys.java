@@ -1,7 +1,6 @@
 package handlers;
 
 import java.awt.event.KeyEvent;
-import java.util.concurrent.TimeUnit;
 
 // this class contains a boolean array of current and previous key states
 // for the 10 keys that are used for this game.
@@ -25,8 +24,6 @@ public class Keys {
 	public static int DASHING = 7;
 	public static int ENTER = 8;
 	public static int ESCAPE = 9;
-	
-	
 	
 	public static void keySet(int i, boolean keyPressed)  {
 		if(i == KeyEvent.VK_W) {

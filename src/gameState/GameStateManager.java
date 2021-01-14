@@ -2,7 +2,6 @@ package gameState;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 
 import main.GamePanel;
 
@@ -23,7 +22,8 @@ public class GameStateManager {
 	public static final int LEVEL_ONE_COMPLETE_STATE = 4;
 	public static final int LEVEL_TWO_STATE = 5;
 	public static final int LEVEL_TWO_COMPLETE_STATE = 6;
-	
+	public static final int LEVEL_THREE_STATE = 7;
+	public static final int LEVEL_THREE_COMPLETE_STATE = 8;
 	
 	public GameStateManager() {
 		gameStates = new GameState[NUM_GAME_STATES];

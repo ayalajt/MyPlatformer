@@ -8,30 +8,35 @@ import java.awt.Rectangle;
 
 import main.GamePanel;
 
-// what every object uses
+/**
+ * The MapObject class is used as the basis of every enemy and player;
+ * it contains their respective coordinates, information on any actions such
+ * as jumping or falling, and contains collision information by checking the coordinates
+ * of two rectangles
+ */
 public abstract class MapObject {
 
-	// tile stuff
+	// tile information
 	protected TileMap tileMap;
 	protected int tileSize;
 	protected double xmap;
 	protected double ymap;
 
-	// position and vector
+	// object's position and vector speed
 	protected double x;
 	protected double y;
 	protected double dx;
 	protected double dy;
 
-	// dimensions
+	// object's dimensions
 	protected int width;
 	protected int height;
 
-	// collision box
+	// object's actual collision box
 	protected int cwidth;
 	protected int cheight;
 
-	// collision
+	// collision information
 	protected int currRow;
 	protected int currCol;
 	protected double xdest;
@@ -43,13 +48,13 @@ public abstract class MapObject {
 	protected boolean bottomLeft;
 	protected boolean bottomRight;
 
-	// animation
+	// animation information
 	protected Animation animation;
 	protected int currentAction;
 	protected int previousAction;
 	protected boolean facingRight;
 
-	// movement
+	// movement information
 	protected boolean left;
 	protected boolean right;
 	protected boolean up;
@@ -73,14 +78,16 @@ public abstract class MapObject {
 	}
 
 	// collision checker
-	public boolean intersection(MapObject o) {
-		Rectangle r1 = getRectangle();
-		Rectangle r2 = o.getRectangle();
-		return r1.intersects(r2);
+	public boolean checkIntersection(MapObject otherObject) {
+		Rectangle rectOne = getRectangle();
+		Rectangle rectTwo = otherObject.getRectangle();
+		return rectOne.intersects(rectTwo);
 	}
 
 	public Rectangle getRectangle() {
-		return new Rectangle((int) x - cwidth, (int) y - cheight, cwidth, cheight);
+		int xCoords = (int) x - cwidth;
+		int yCoords = (int) y - cheight;
+		return new Rectangle(xCoords, yCoords, cwidth, cheight);
 	}
 
 	public void calculateCorners(double x, double y) {
@@ -114,13 +121,13 @@ public abstract class MapObject {
 		currRow = (int) y / tileSize;
 		xdest = x + dx;
 		ydest = y + dy;
-
 		xtemp = x;
 		ytemp = y;
 
 		// y direction
 
 		calculateCorners(x, ydest);
+		
 		// going up
 		if (dy < 0) {
 			if (topLeft || topRight) {
@@ -128,7 +135,7 @@ public abstract class MapObject {
 				ytemp = currRow * tileSize + cheight / 2;
 
 			} else {
-				ytemp += dy;
+				ytemp = ytemp + dy;
 			}
 		}
 		// going down
@@ -138,20 +145,21 @@ public abstract class MapObject {
 				falling = false;
 				ytemp = (currRow + 1) * tileSize - cheight / 2;
 			} else {
-				ytemp += dy;
+				ytemp = ytemp + dy;
 			}
 		}
 
 		// x direction
 
 		calculateCorners(xdest, y);
+		
 		// left
 		if (dx < 0) {
 			if (topLeft || bottomLeft) {
 				dx = 0;
 				xtemp = currCol * tileSize + cwidth / 2;
 			} else {
-				xtemp += dx;
+				xtemp = xtemp + dx;
 			}
 		}
 		// right
@@ -160,11 +168,12 @@ public abstract class MapObject {
 				dx = 0;
 				xtemp = (currCol + 1) * tileSize - cwidth / 2;
 			} else {
-				xtemp += dx;
+				xtemp = xtemp + dx;
 			}
 		}
 
 		if (!falling) {
+			
 			// check if fell
 			calculateCorners(x, ydest + 1);
 
@@ -235,6 +244,7 @@ public abstract class MapObject {
 	}
 
 	public boolean notOnScreen() {
+		
 		// returns whether map object is on screen
 		return x + xmap + width < 0 || x + xmap - width > GamePanel.WIDTH || y + ymap + height < 0
 				|| y + ymap - height > GamePanel.HEIGHT;

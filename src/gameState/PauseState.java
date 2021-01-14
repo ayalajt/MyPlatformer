@@ -1,11 +1,9 @@
 package gameState;
 
-import java.awt.Color;
-import java.awt.Font;
+
 import java.awt.Graphics2D;
 
 import handlers.Keys;
-import main.GamePanel;
 import tileMap.Background;
 
 public class PauseState extends GameState {
