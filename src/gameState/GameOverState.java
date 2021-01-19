@@ -4,39 +4,44 @@ import java.awt.*;
 import handlers.Keys;
 import tileMap.Background;
 
+/**
+ * The Game Over State is used when the player runs out of lives and it is
+ * simply a text and background image
+ *
+ */
 public class GameOverState extends GameState {
-	
-	private Background bg;
+
+	private Background background;
 	private Background text;
-	
+
 	public GameOverState(GameStateManager gsm) {
 		super(gsm);
 		try {
-			bg = new Background("/backgrounds/menubg.gif", 1);
-			// changed from -0.1 originally
-			bg.setVector(-0.4, 0);
-			text = new Background("/backgrounds/gameOverBackground.gif",1);
-			
-		}
-		catch(Exception e) {
+			background = new Background("/backgrounds/menuBackground.gif", 1);
+			background.setVector(-0.2, 0);
+			text = new Background("/backgrounds/gameOverBackground.gif", 1);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void init() {}
+
+	public void init() {
+	}
+
 	public void update() {
-		bg.update();
+		background.update();
 		text.update();
 		handleInput();
 	}
+
 	public void draw(Graphics2D g) {
-		bg.draw(g);
+		background.draw(g);
 		text.draw(g);
-		
+
 	}
 
 	public void handleInput() {
-		if(Keys.isPressed(Keys.ESCAPE)) {
+		if (Keys.isPressed(Keys.ESCAPE)) {
 			gsm.setState(GameStateManager.MENU_STATE);
 		}
 	}

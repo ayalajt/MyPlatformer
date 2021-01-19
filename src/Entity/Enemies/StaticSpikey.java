@@ -2,19 +2,18 @@ package Entity.Enemies;
 
 import tileMap.TileMap;
 import Entity.*;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
+
+/**
+ * The Static Spikey class is used for the stationary enemies that are big spikes.
+ * It can be rotated left, right, upside down, or facing upwards
+ */
 
 public class StaticSpikey extends Enemy {
 	private ArrayList<BufferedImage[]> sprites;
-	double origY;
-	int maxFramesMoved = 100;
-	int framesMovedCounter = 0;
-	double floatingMoveSpeed = 0.15;
 	int setDefault = 0;
 	int turnLeft = 1;
 	int turnRight = 2;
@@ -29,27 +28,20 @@ public class StaticSpikey extends Enemy {
 		
 		width = 30;
 		height = 30;
-		//cwidth = 22;
-		//cheight = 26;
 		cwidth = 20;
 		cheight = 24;
-		
-		// if left or right then swap cwidth and cheight
-		
+				
 		health = maxHealth = 9999;
 		damage = 1;
 		
 		// load sprites
 		try {
-			BufferedImage spritesheet = ImageIO.read(
-					getClass().getResourceAsStream(
-							"/sprites_enemies/staticSpikey.gif"));
+			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/sprites_enemies/staticSpikey.gif"));
 			sprites = new ArrayList<BufferedImage[]>();
-			// 1 animation
 			for (int i = 0; i < 4; i++) {
-				BufferedImage[] bi = new BufferedImage[1];
-				bi[0] = spritesheet.getSubimage(i * width, 0, width, height);
-				sprites.add(bi);
+				BufferedImage[] image = new BufferedImage[1];
+				image[0] = spritesheet.getSubimage(i * width, 0, width, height);
+				sprites.add(image);
 			}					
 	
 		} catch (Exception e) {
@@ -67,30 +59,28 @@ public class StaticSpikey extends Enemy {
 		cwidth = 24;
 		cheight = 20;
 		animation.setFrames(sprites.get(turnLeft));
-
 	}
 	
 	public void setRight() {
 		cwidth = 24;
 		cheight = 20;
 		animation.setFrames(sprites.get(turnRight));
-
 	}
 	
 	public void setUpsideDown() {
-
+		cwidth = 20;
+		cheight = 24;
 		animation.setFrames(sprites.get(turnUpsideDown));
-
 	}
-	private void getNextPosition() {	
-				
-
-		
+	
+	public void setDefault() {
+		cwidth = 20;
+		cheight = 24;
+		animation.setFrames(sprites.get(turnUpsideDown));
 	}
 	
 	public void update() {
 		// update position
-		getNextPosition();
 		checkTileMapCollision();
 		setPosition(xtemp, ytemp);
 		
@@ -102,18 +92,11 @@ public class StaticSpikey extends Enemy {
 			}
 		}
 		
-	
-		
 		animation.update();
 	}
 	
 	public void draw(Graphics2D g) {
-		
-		//if (notOnScreen()) return; 
 		setMapPosition();
-		super.draw(g);
-		
+		super.draw(g);		
 	}
-	
 }
-

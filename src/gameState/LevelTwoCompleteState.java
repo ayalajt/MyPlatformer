@@ -15,8 +15,8 @@ public class LevelTwoCompleteState extends GameState {
 	public LevelTwoCompleteState(GameStateManager gsm) {
 		super(gsm);
 		try {
-			bg = new Background("/backgrounds/menubg.gif", 1);
-			text = new Background("/backgrounds/LevelTwoCompleteBG.gif", 1);
+			bg = new Background("/backgrounds/menuBackground.gif", 1);
+			text = new Background("/backgrounds/LevelTwoCompleteText.gif", 1);
 			// changed from -0.1 originally
 			bg.setVector(-0.4, 0);
 			

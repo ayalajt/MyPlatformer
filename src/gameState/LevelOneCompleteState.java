@@ -13,8 +13,8 @@ public class LevelOneCompleteState extends GameState {
 	public LevelOneCompleteState(GameStateManager gsm) {
 		super(gsm);
 		try {
-			bg = new Background("/backgrounds/menubg.gif", 1);
-			text = new Background("/backgrounds/LevelOneCompleteBG.gif", 1);
+			bg = new Background("/backgrounds/menuBackground.gif", 1);
+			text = new Background("/backgrounds/LevelOneCompleteText.gif", 1);
 			// changed from -0.1 originally
 			bg.setVector(-0.4, 0);
 		}

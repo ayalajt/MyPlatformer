@@ -19,10 +19,10 @@ public class MenuState extends GameState {
 	public MenuState(GameStateManager gsm) {
 		super(gsm);
 		try {
-			bg = new Background("/backgrounds/menubg.gif", 1);
+			bg = new Background("/backgrounds/menuBackground.gif", 1);
 			title = new Background("/backgrounds/title.gif", 1);
 			// changed from -0.1 originally
-			bg.setVector(-0.4, 0);
+			bg.setVector(-0.2, 0);
 			
 			defaultFont = new Font("Arial", Font.PLAIN, 25);
 			defaultBoldFont = new Font("Arial", Font.BOLD + Font.ITALIC, 25);

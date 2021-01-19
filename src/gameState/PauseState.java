@@ -18,10 +18,9 @@ public class PauseState extends GameState {
 	
 		
 		try {
-			bg = new Background("/backgrounds/menubg.gif", 1);
-			// changed from -0.1 originally
-			bg.setVector(-0.4, 0);
-			text = new Background("/backgrounds/pauseBackground.gif", 1);
+			bg = new Background("/backgrounds/pauseBackground.gif", 1);
+			bg.setVector(-0.2, 0);
+			text = new Background("/backgrounds/pauseText.gif", 1);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

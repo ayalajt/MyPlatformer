@@ -2,41 +2,46 @@ package Entity.Enemies;
 
 import tileMap.TileMap;
 import Entity.*;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
 import javax.imageio.ImageIO;
 
-/**
- * The Spikey class is used as the default standard enemy, which moves a certain direction
- * until a hits a wall and then goes the opposite direction
- */
-public class Spikey extends Enemy {
+public class BossSpikey extends Enemy {
 	private BufferedImage[] sprites;
 	
-	public Spikey(TileMap tm) {
+	public BossSpikey(TileMap tm) {
 		super(tm);
 		moveSpeed = 0.5;
 		maxSpeed = 0.5;
 		fallSpeed = 0.2;
 		maxFallSpeed = 10.0;
+		
 		width = 30;
 		height = 30;
 		cwidth = 22;
 		cheight = 20;
+		
 		health = maxHealth = 2;
 		damage = 1;
 		
 		// load sprites
 		try {
-			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/sprites_enemies/spikey.gif"));
+			BufferedImage spritesheet = ImageIO.read(
+					getClass().getResourceAsStream(
+							"/sprites_enemies/spikey.gif"));
 			sprites = new BufferedImage[1];
 			sprites[0] = spritesheet.getSubimage(0, 0, width, height);
+					
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		animation = new Animation();
 		animation.setFrames(sprites);
+	//	animation.setDelay(300);
 		right = true;
 		facingRight = true;
 		
@@ -44,19 +49,21 @@ public class Spikey extends Enemy {
 	
 	private void getNextPosition() {
 		if (left) {
-			dx = dx - moveSpeed;
+			dx -= moveSpeed;
 			if (dx < -maxSpeed) {
 				dx = -maxSpeed;
 			}
 		}
 		else if (right) {
-			dx = dx + moveSpeed;
+			dx += moveSpeed;
 			if (dx > maxSpeed) {
 				dx = maxSpeed;
 			}
 		}
+		
+		// falling
 		if (falling) {
-			dy = dy + fallSpeed;
+			dy += fallSpeed;
 		}
 	}
 	
@@ -85,11 +92,16 @@ public class Spikey extends Enemy {
 			left = false;
 			facingRight = true;
 		}
+		
 		animation.update();
 	}
 	
 	public void draw(Graphics2D g) {
+		
+		//if (notOnScreen()) return; 
 		setMapPosition();
-		super.draw(g);		
+		super.draw(g);
+		
 	}
+	
 }
