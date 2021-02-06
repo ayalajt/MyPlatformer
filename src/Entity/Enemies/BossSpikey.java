@@ -5,12 +5,15 @@ import Entity.*;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 public class BossSpikey extends Enemy {
-	private BufferedImage[] sprites;
-	
+	private ArrayList<BufferedImage[]> sprites;
+	boolean startMoving = false;
+	boolean playerNearby = false;
+	boolean playedOnce = false;
 	public BossSpikey(TileMap tm) {
 		super(tm);
 		moveSpeed = 0.5;
@@ -18,21 +21,25 @@ public class BossSpikey extends Enemy {
 		fallSpeed = 0.2;
 		maxFallSpeed = 10.0;
 		
-		width = 30;
-		height = 30;
-		cwidth = 22;
-		cheight = 20;
+		width = 60;
+		height = 60;
+		cwidth = 30;
+		cheight = 30;
 		
 		health = maxHealth = 2;
 		damage = 1;
 		
+		
 		// load sprites
 		try {
-			BufferedImage spritesheet = ImageIO.read(
-					getClass().getResourceAsStream(
-							"/sprites_enemies/spikey.gif"));
-			sprites = new BufferedImage[1];
-			sprites[0] = spritesheet.getSubimage(0, 0, width, height);
+			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/sprites_enemies/BossSpikey.gif"));
+
+			sprites = new ArrayList<BufferedImage[]>();
+			for (int i = 0; i < 3; i++) {
+				BufferedImage[] actionSprites = new BufferedImage[1];
+				actionSprites[0] = spritesheet.getSubimage(i * width, 0, width, height);
+				sprites.add(actionSprites);
+			}
 					
 			
 		} catch (Exception e) {
@@ -40,22 +47,24 @@ public class BossSpikey extends Enemy {
 		}
 		
 		animation = new Animation();
-		animation.setFrames(sprites);
+		animation.setFrames(sprites.get(0));
+
 	//	animation.setDelay(300);
-		right = true;
-		facingRight = true;
+		left = true;
+		right = false;
+		facingRight = false;
 		
 	}
 	
 	private void getNextPosition() {
 		if (left) {
-			dx -= moveSpeed;
+			dx = dx - moveSpeed;
 			if (dx < -maxSpeed) {
 				dx = -maxSpeed;
 			}
 		}
 		else if (right) {
-			dx += moveSpeed;
+			dx = dx + moveSpeed;
 			if (dx > maxSpeed) {
 				dx = maxSpeed;
 			}
@@ -63,37 +72,51 @@ public class BossSpikey extends Enemy {
 		
 		// falling
 		if (falling) {
-			dy += fallSpeed;
+			dy = dy + fallSpeed;
 		}
 	}
 	
 	public void update() {
-		// update position
-		getNextPosition();
-		checkTileMapCollision();
-		setPosition(xtemp, ytemp);
-		
-		// check flinching
-		if (flinching) {
-			long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
-			if (elapsed > 400) {
-				flinching = false;
+		if (playerNearby == true && playedOnce == false) {
+			animation.setFrames(sprites.get(1));
+			playedOnce = true;
+		}
+		if (startMoving == true) {
+			animation.setFrames(sprites.get(1));
+			
+			
+			animation.setFrames(sprites.get(2));
+			// update position
+			getNextPosition();
+			checkTileMapCollision();
+			setPosition(xtemp, ytemp);
+			
+			// check flinching
+			if (flinching) {
+				long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
+				if (elapsed > 400) {
+					flinching = false;
+				}
 			}
-		}
-		
-		// if it hits a wall, then go opposite direction
-		if (right && dx == 0) {
-			right = false;
-			left = true;
-			facingRight = false;
-		}
-		else if (left && dx == 0) {
-			right = true;
-			left = false;
-			facingRight = true;
+			
+			// if it hits a wall, then go opposite direction
+			if (right && dx == 0) {
+				right = false;
+				left = true;
+				facingRight = false;
+			}
+			else if (left && dx == 0) {
+				right = true;
+				left = false;
+				facingRight = true;
+			}
+			
 		}
 		
 		animation.update();
+
+	
+	
 	}
 	
 	public void draw(Graphics2D g) {
@@ -102,6 +125,14 @@ public class BossSpikey extends Enemy {
 		setMapPosition();
 		super.draw(g);
 		
+	}
+	
+	public void startMoving() {
+		startMoving = true;
+	}
+	
+	public void playerNearby() {
+		playerNearby = true;
 	}
 	
 }

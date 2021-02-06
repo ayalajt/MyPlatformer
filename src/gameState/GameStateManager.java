@@ -14,7 +14,7 @@ public class GameStateManager {
 	private PauseState pauseState;
 	private boolean paused;
 	
-	public static final int NUM_GAME_STATES = 6;
+	public static final int NUM_GAME_STATES = 9;
 	public static final int MENU_STATE = 0;
 	public static final int DEAD_STATE = 1;
 	public static final int GAME_OVER_STATE = 2;
@@ -64,6 +64,12 @@ public class GameStateManager {
 		}
 		if (state == LEVEL_TWO_COMPLETE_STATE) {
 			gameStates[state] = new LevelTwoCompleteState(this);
+		}
+		if (state == LEVEL_THREE_STATE) {
+			gameStates[state] = new LevelThreeState(this);
+		}
+		if (state == LEVEL_THREE_COMPLETE_STATE) {
+			gameStates[state] = new LevelThreeCompleteState(this);
 		}
 		
 		
